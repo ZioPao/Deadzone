@@ -1,0 +1,17 @@
+SCR_ChimeraCharacter {
+ ID "520EC961A090B1EE"
+ components {
+  CharacterAnimationComponent "{520EA1D2F659C994}" {
+   components {
+    SCR_CharacterCommandHandlerComponent "{520EA1D2F659C99A}" {
+     MoveSettings DeadzoneScriptCharacterCommandMoveSettings "{520EA1D2F659C99B}" {
+      HeadingChangeSpeedMax 250
+      AutoAlignHeadingOffsetThreshold 45.186
+      m_fAutoAlignHeadingOffsetThreshold 6.755
+     }
+    }
+   }
+  }
+ }
+ coords 41.35 1.001 85.801
+}
