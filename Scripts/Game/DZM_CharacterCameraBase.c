@@ -49,7 +49,7 @@ modded class CharacterCamera1stPerson : CharacterCameraBase
 		////////////////////////////////////////////////////////////////////////////////
 		OrderedVariablesMap dzmVariablesMap = new OrderedVariablesMap();
 		
-		dzmVariablesMap.Set("waitTimeBetweenFrames", new VariableInfo("Wait between frames", "0.033", EFilterType.TYPE_FLOAT));
+		dzmVariablesMap.Set("maxVerticalBeforeMovement", new VariableInfo("Max Vertical Movement Before Change", "25", EFilterType.TYPE_FLOAT));
 		
 		if (!MCF_SettingsManager.GetJsonManager(DZM_MOD_ID))
 		{
@@ -62,6 +62,9 @@ modded class CharacterCamera1stPerson : CharacterCameraBase
 			MCF_SettingsManager.GetJsonManager(DZM_MOD_ID).SetUserHelpers(dzmVariablesMap);		
 		}
 
+	
+		// Update every loop I guess
+		dzmSettings = MCF_SettingsManager.GetModSettings(DZM_MOD_ID);
 
 		pOutResult.m_fUseHeading = 0.0;
 		
@@ -76,8 +79,8 @@ modded class CharacterCamera1stPerson : CharacterCameraBase
 		
 		float weaponAimingDir = m_ControllerComponent.GetWeaponAngles()[1];
 
-		// 10 is the value we want to compensate for
-		if (Math.AbsFloat(weaponAimingDir - deadzoneStoppingPoint) > 25)
+		// 25 is the value we want to compensate for
+		if (Math.AbsFloat(weaponAimingDir - deadzoneStoppingPoint) > dzmSettings.Get("maxVerticalBeforeMovement").ToInt())
 		{
 			lookAngles[1] = Math.SmoothCD(lookAngles[1], yAxisAngle, vel, 0.4, 1000, pDt);
 
